@@ -12,8 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import org.springframework.stereotype.Repository;
 
-
-
+import com.freehoon.common.Pagination;
 import com.freehoon.web.board.model.BoardVO;
 
 
@@ -29,9 +28,9 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 	@Override
-	public List<BoardVO> getBoardList() throws Exception {
+	public List<BoardVO> getBoardList(Pagination pagination) throws Exception {
 
-		return sqlSession.selectList("com.freehoon.web.board.boardMapper.getBoardList");
+		return sqlSession.selectList("com.freehoon.web.board.boardMapper.getBoardList", pagination);
 
 	}
 
@@ -77,6 +76,15 @@ public class BoardDAOImpl implements BoardDAO {
 	public int updateViewCnt(int bid) throws Exception {
 
 		return sqlSession.update("com.freehoon.web.board.boardMapper.updateViewCnt", bid);
+
+	}
+	
+	//총 게시글 개수 확인
+
+	@Override
+	public int getBoardListCnt() throws Exception {
+
+		return sqlSession.selectOne("com.freehoon.web.board.boardMapper.getBoardListCnt");
 
 	}
 
