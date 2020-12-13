@@ -13,21 +13,25 @@
 
 		FROM
 
-			TBL_BOARD
+			tbl_board
+			LIMIT #{startList}, #{listSize}
 
 	</select>
 
 	
 
-	<select id="getBoardContent" resultType="com.freehoon.web.board.model.BoardVO" parameterType="com.freehoon.web.board.model.BoardVO">
+	<select id="getBoardCnt" resultType="com.freehoon.web.board.model.BoardVO" parameterType="com.freehoon.web.board.model.BoardVO">
 
 		SELECT
 
 			BID, CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
+			count(*) as listCnt
 
 		FROM
 
-			TBL_BOARD
+			tbl_board
+			
+
 
 		WHERE
 
@@ -39,7 +43,7 @@
 
 	<insert id="insertBoard" parameterType="com.freehoon.web.board.model.BoardVO">
 
-		INSERT INTO TBL_BOARD (CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT)
+		INSERT INTO tbl_board (CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT)
 
 		VALUES (
 
@@ -67,7 +71,7 @@
 
 	<update id="updateBoard" parameterType="com.freehoon.web.board.model.BoardVO">
 
-		UPDATE TBL_BOARD SET
+		UPDATE tbl_board SET
 
 			CATE_CD = #{cate_cd}
 
@@ -89,7 +93,7 @@
 
 	<delete id="deleteBoard" parameterType="int">
 
-		DELETE FROM TBL_BOARD
+		DELETE FROM tbl_board
 
 		WHERE BID = #{bid}
 
@@ -99,7 +103,7 @@
 
 	<update id="updateViewCnt" parameterType="com.freehoon.web.board.model.BoardVO">
 
-		UPDATE TBL_BOARD SET
+		UPDATE tbl_board SET
 
 			VIEW_CNT = VIEW_CNT + 1
 

@@ -30,6 +30,17 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	
+	<!-- Error Page -->
+
+	<error-page>
+
+		<error-code>404</error-code>
+
+		<location>/WEB-INF/views/error/404error.jsp</location>
+
+	</error-page>
+
 	<!-- Character Set Filter -->
 
 	<filter> 
